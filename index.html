@@ -23,40 +23,34 @@
 			text-align: center;
 			background-color: #14bdac;
 		}
-
 	</style>
 </head>
 <body>
-		<h1 class="pad">Jogo da Velha</h1>
-		<h3 class="pad" id="vez"></h3>
-	
-		<table class="tabela" border="1">
-			<tr class="dif">
-				<td class="celula" id="linha1Coluna1" onclick="adicionarXAqui('linha1Coluna1', 1)"></td>
-				<td class="celula" id="linha1Coluna2" onclick="adicionarXAqui('linha1Coluna2', 2)"></td>
-				<td class="celula" id="linha1Coluna3" onclick="adicionarXAqui('linha1Coluna3', 3)"></td>
-			</tr>
-			<tr class="dif">
-				<td class="celula" id="linha2Coluna1"  onclick="adicionarXAqui('linha2Coluna1', 4)"></td>
-				<td class="celula" id="linha2Coluna2"  onclick="adicionarXAqui('linha2Coluna2', 5)"></td>
-				<td class="celula" id="linha2Coluna3"  onclick="adicionarXAqui('linha2Coluna3', 6)"></td>
-			</tr>
-			<tr class="dif">
-				<td class="celula" id="linha3Coluna1" onclick="adicionarXAqui('linha3Coluna1', 7)"></td>
-				<td class="celula" id="linha3Coluna2" onclick="adicionarXAqui('linha3Coluna2', 8)"></td>
-				<td class="celula" id="linha3Coluna3" onclick="adicionarXAqui('linha3Coluna3', 9)"></td>
-			</tr>
-		</table>
+	<h1 class="pad">Jogo da Velha</h1>
+	<h3 class="pad" id="vez"></h3>
 
-
+	<table class="tabela" border="1">
+		<tr class="dif">
+			<td class="celula" id="linha1Coluna1" onclick="adicionarXAqui('linha1Coluna1', 1)"></td>
+			<td class="celula" id="linha1Coluna2" onclick="adicionarXAqui('linha1Coluna2', 2)"></td>
+			<td class="celula" id="linha1Coluna3" onclick="adicionarXAqui('linha1Coluna3', 3)"></td>
+		</tr>
+		<tr class="dif">
+			<td class="celula" id="linha2Coluna1"  onclick="adicionarXAqui('linha2Coluna1', 4)"></td>
+			<td class="celula" id="linha2Coluna2"  onclick="adicionarXAqui('linha2Coluna2', 5)"></td>
+			<td class="celula" id="linha2Coluna3"  onclick="adicionarXAqui('linha2Coluna3', 6)"></td>
+		</tr>
+		<tr class="dif">
+			<td class="celula" id="linha3Coluna1" onclick="adicionarXAqui('linha3Coluna1', 7)"></td>
+			<td class="celula" id="linha3Coluna2" onclick="adicionarXAqui('linha3Coluna2', 8)"></td>
+			<td class="celula" id="linha3Coluna3" onclick="adicionarXAqui('linha3Coluna3', 9)"></td>
+		</tr>
+	</table>
 </body>
-
 
 	<script type="text/javascript">
 		var quadrantesMarcados = [];
-
 		var delayInMilliseconds = 2000;
-
 		var arrayIdComQuadrante = [
 			"",  //index 0
 			"linha1Coluna1", // index 1
@@ -70,13 +64,14 @@
 			"linha3Coluna3", // index 9
 		]
 		
-
 		function adicionarXAqui(idCelula, quadrante){	
 			if(quadrantesMarcados.indexOf(quadrante) == -1 ){
 				preencheVelha(idCelula, "x", quadrante)
-			 	efetuarJogadaDaMaquina();
 			 	document.querySelector('#vez').innerHTML = "";
-			 	document.querySelector('#vez').innerHTML = "Vez de <i class='far fa-circle'></i>";//ok			
+			 	document.querySelector('#vez').innerHTML = "Vez de <i class='far fa-circle'></i>";		
+			 	setTimeout(function() {
+			 		efetuarJogadaDaMaquina();
+			 	}, delayInMilliseconds);
 			}
 		}
 
@@ -90,13 +85,11 @@
 				
 				preencheVelha(idQuadranteEscolhidoPelaMaquina, "0", quadranteMaquina)
 			}else{
-				console.log("ACHEI PREENCHIDO. Quandrante: " + quadranteMaquina );
-				//console.log("probleeeeema");	
+				console.log("ACHEI PREENCHIDO. Quandrante: " + quadranteMaquina );	
 			}
 			document.querySelector('#vez').innerHTML = "";
 			document.querySelector('#vez').innerHTML = "Vez de <i class='fas fa-times'></i>";
 			console.log("Mudei aqui");
-
 		}
 
 		function preencheVelha(idQuadrante, tipo, valorQuadrante){
@@ -106,20 +99,12 @@
 			var elemento = document.getElementById(idQuadrante);
 				if(tipo == "x"){
 					elemento.innerHTML = "<i class='fas fa-times fa-2x'></i>";
-
 				}else{
-					setTimeout(function() {
-						elemento.innerHTML = "<i class='far fa-circle fa-2x'></i>";
-					}, delayInMilliseconds);
-					document.querySelector('#vez').innerHTML = "";
-					document.querySelector('#vez').innerHTML = "Vez de <i class='fas fa-times'></i>";
+					elemento.innerHTML = "<i class='far fa-circle fa-2x'></i>";
 				}
-			quadrantesMarcados.push(valorQuadrante); //adiciona elementos a um array	
+			quadrantesMarcados.push(valorQuadrante);
 		}
 
-		document.querySelector('#vez').innerHTML = "Vez de <i class='fa fa-times'></i>";//ok
-
-
-
+		document.querySelector('#vez').innerHTML = "Vez de <i class='fa fa-times'></i>";
 	</script>
 </html>
